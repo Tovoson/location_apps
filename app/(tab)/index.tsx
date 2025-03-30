@@ -1,15 +1,14 @@
-import { Text, View } from "react-native";
+import AffichageDetails from "@/components/affichageDetais";
+import Formulaire from "@/components/formulaire";
+import ListeApp from "@/components/listeApp";
+import { ScrollView, Text, View } from "react-native";
 
 export default function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
+    <ScrollView>
+      <Formulaire/>
+      <ListeApp/>
+      <AffichageDetails/>
+    </ScrollView>
   );
 }

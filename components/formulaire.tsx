@@ -1,6 +1,7 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
-import forms from "@/styles/formulaire"
+import {style} from '@/stylesApp/formulaires'
+import { icons } from '@/constants/icons'
 
 const Formulaire = () => {
 
@@ -8,8 +9,10 @@ const Formulaire = () => {
     const [design, setDesign] = useState('')
     const [loyer, setLoyer] = useState()
 
+  const ajout = () => {}
+
   return (
-    <View style={forms}>
+    <View style={style.container}>
       <TextInput 
         value={numApp}
         onChangeText={setnumApp}
@@ -31,9 +34,9 @@ const Formulaire = () => {
 
         <TouchableOpacity
             style={style.btn}
-            onPress={ajouter}
+            onPress={ajout}
         >
-            
+            <Image source={icons.ajouter} style={style.img} />
         </TouchableOpacity>
     </View>
   )
