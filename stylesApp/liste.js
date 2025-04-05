@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const styleListe = StyleSheet.create({
     container1: {
         display: 'flex',
-        alignItems: 'left',
+        alignItems: 'flex-start',
         justifyContent: 'space-between',
         width: '93%',
         gap: 2,
@@ -16,7 +16,7 @@ export const styleListe = StyleSheet.create({
     },
     container2: {
         display: 'flex',
-        alignItems: 'left',
+        alignItems: 'flex-start',
         justifyContent: 'center',
         gap: 5
         
@@ -31,7 +31,6 @@ export const styleListe = StyleSheet.create({
 
     text_primary: {
         fontSize: 17,
-        color: '',
         fontWeight: "600"
     },
     text_secondary: {

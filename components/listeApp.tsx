@@ -73,19 +73,21 @@ const ListeApp = ({setApp, refresh}: any) => {
                 
                 />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => setModalVisible(true)}
+                >
                 <Image 
-                source={icons.supprimer} 
-                style={styleListe.img}
-                onPress={() => setModalVisible(true)} />
+                  source={icons.supprimer} 
+                  style={styleListe.img}
+                   />
                 </TouchableOpacity>                    
           </View>
           
         </View>
-      }     
+           
     )
   
-
+  }
   return (
     <View>
       <FlatList
@@ -105,5 +107,3 @@ const ListeApp = ({setApp, refresh}: any) => {
 }
 
 export default ListeApp
-
-const styles = StyleSheet.create({})

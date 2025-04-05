@@ -25,3 +25,18 @@ export const addData = async(data) => {
     console.log(err)
   }
 }
+
+export const updateData = async(data) => {
+  try{
+       const reponse = axios.put("http://127.0.0.1:8000/appart/liste/", data, {
+        headers:{
+          'Content-Type': 'application/json'
+        }
+       })
+
+       console.log(reponse.data)
+
+  } catch(err){
+    console.log(err)
+  }
+}
