@@ -2,44 +2,44 @@ import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'reac
 import React, { useEffect, useState } from 'react'
 import {style} from '@/stylesApp/formulaires'
 import { icons } from '@/constants/icons'
+import {addData, fetchData} from '@/service/service'
 
-const Formulaire = ({app}: any) => {
+const Formulaire = ({app, setRefresh}: any) => {
 
     const [formData, setformData] = useState({
-      numApp: '',
       design: '',
       loyer: ''
-    })
+    });
+    const [isExist, setIsExist] = useState(false)
 
     useEffect(() => {
       if(app){
-        setformData(app)
+        setformData(app);
+        setIsExist(true)
       }else{
 
         
         return setformData({
-        numApp: '',
-        design: '',
-        loyer: ''
+          design: '',
+          loyer: ''
         })
       }
     
     }, [app])
     
 
-  const ajout = () => {}
+  const ajout = () => {
+    addData(formData);
+    setRefresh(true)
+  }
+  const modifier = () => {}
   const handleChange = (field: string, value: any) => {
     setformData({...formData, [field]: value})
   }
 
   return (
     <View style={style.container}>
-      <TextInput 
-        value={formData.numApp}
-        onChangeText={(text) => handleChange('numApp', text)}
-        placeholder="numéro de l'appartement"
-        style={style.input}
-        />
+      
       <TextInput 
         style={style.input}
         value={formData.design}
@@ -55,9 +55,9 @@ const Formulaire = ({app}: any) => {
 
         <TouchableOpacity
             style={style.btn}
-            onPress={ajout}
+            onPress={isExist ? modifier : ajout}
         >
-            <Image source={app ? "Modifier" : icons.ajouter} style={style.img} />
+            <Image source={isExist ? icons.modifier : icons.ajouter} style={style.img} />
         </TouchableOpacity>
     </View>
   )

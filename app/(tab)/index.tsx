@@ -6,10 +6,12 @@ import { ScrollView, Text, View } from "react-native";
 
 export default function Index() {
   const [app, setApp] = useState()
+  const [refresh, setRefresh] = useState(false)
+
   return (
     <ScrollView>
-      <Formulaire app ={app} />
-      <ListeApp setApp = {setApp} />
+      <Formulaire app ={app}  setRefresh={setRefresh} />
+      <ListeApp setApp = {setApp} refresh={refresh} />
       <AffichageDetails/>
     </ScrollView>
   );
