@@ -4,48 +4,48 @@ import { style } from '@/stylesApp/AffichageDetails'
 // import { fakeData } from "@/fakedata/fakeApp"
 import { fetchData } from '@/service/service'
 import axios from 'axios'
+import LoadingIndicator from './loading'
 
-const AffichageDetails = () => {
-  const [min, setMin] = useState()
-  const [max, setMax] = useState()
-  const [total, setTotal] = useState()
+const AffichageDetails = ({setStat, setHLoading}: any) => {
+  
+  const [stats, setStats] = useState({
+    min: '',
+    max: '',
+    total: ''
+  })
+  const [loading, setLoading] = useState(false)
 
-    // const loyerMax = () =>{
-
-    //     let Max = liste[0].loyer
-    //     for (let i = 0; i < liste.length; i++){
-    //         if (liste[i].loyer > Max){
-    //             Max = liste[i].loyer
-    //         }
-    //     }
-    //     return Max
-
-    // }
-
-    
-
-   
 
     // Fonction pour récupérer les données de l'API
-const fetchData = async () => {
-  try {
-    const reponse = await axios.get("http://127.0.0.1:8000/appart/liste/")
-    const data = reponse.data;
-    const liste = Array.isArray(data) ? data : (data.results || data.data || Object.values(data));
+  const fetchData = async () => {
+    try {
+      setLoading(true)
+      const reponse = await axios.get("http://127.0.0.1:8000/appart/liste/")
+      const data = reponse.data;
+      const liste = Array.isArray(data) ? data : (data.results || data.data || Object.values(data));
 
-    console.log(liste)
+        const maxLoyer = loyerMax(liste);
+        const minLoyer = loyerMin(liste);
+        const totalLoyer = loyerTotal(liste)
+        
 
-      const maxLoyer = loyerMax(liste);
-      const minLoyer = loyerMin(liste);
-      const totalLoyer = loyerTotal(liste)
-      
-      setMin(minLoyer)
-      setMax(maxLoyer)
-      setTotal(totalLoyer)
-  } catch (error) {
-      console.error('Erreur lors de la récupération des données:', error);
-  }
-};
+        setStats({
+          min: minLoyer,
+          max: maxLoyer,
+          total: totalLoyer
+        })
+
+        setLoading(false)
+
+        setStat({
+          min : minLoyer, 
+          max : maxLoyer, 
+          total : totalLoyer
+        })
+    } catch (error) {
+        console.error('Erreur lors de la récupération des données:', error);
+    }
+  };
 
   const loyerTotal = (liste: string | any[]) =>{
     if (!liste || liste.length === 0) {
@@ -91,28 +91,28 @@ const fetchData = async () => {
   };
 
 
-    useEffect(() => {
-        fetchData()
-        // loyerTotal()
-        // loyerMax()
-        // loyerMin()
-    
-    }, [])
-    
+  useEffect(() => {
+    fetchData()
+    setHLoading(!loading)
+  }, [])
+
+  if(loading){
+    return(<LoadingIndicator message='Chargement stat...' />)
+  }
 
   return (
     <View style={style.container} >
       <View style={style.element}>
         <Text>Total des loyers</Text>
-        <Text>{total}</Text>
+        <Text>{stats.total}</Text>
       </View>
       <View style={style.element}>
         <Text>Loyer Maximal</Text>
-        <Text>{max}</Text>
+        <Text>{stats.max}</Text>
       </View>
       <View style={style.element}>
         <Text>Loyer Minimal</Text>
-        <Text>{min}</Text>
+        <Text>{stats.min}</Text>
       </View>
     </View>
   )

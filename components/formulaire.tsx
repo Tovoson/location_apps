@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'reac
 import React, { useEffect, useState } from 'react'
 import {style} from '@/stylesApp/formulaires'
 import { icons } from '@/constants/icons'
-import {addData, fetchData} from '@/service/service'
+import {addData, fetchData, updateData} from '@/service/service'
 
 const Formulaire = ({app, setRefresh}: any) => {
 
@@ -32,7 +32,9 @@ const Formulaire = ({app, setRefresh}: any) => {
     addData(formData);
     setRefresh(true)
   }
-  const modifier = () => {}
+  const modifier = () => {
+    updateData(formData)
+  }
   const handleChange = (field: string, value: any) => {
     setformData({...formData, [field]: value})
   }

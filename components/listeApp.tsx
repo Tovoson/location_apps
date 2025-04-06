@@ -1,10 +1,10 @@
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { fakeData } from "@/fakedata/fakeApp"
 import { icons } from '@/constants/icons'
 import { styleListe } from "@/stylesApp/liste"
 import CustomModal from './modale'
-import {fetchData} from '@/service/service'
+import {fetchData, deleteService} from '@/service/service'
+import LoadingIndicator from './loading'
 
 const ListeApp = ({setApp, refresh}: any) => {
 
@@ -20,7 +20,7 @@ const ListeApp = ({setApp, refresh}: any) => {
   }, [])
 
   useEffect(() => {
-    console.log(liste) 
+    console.log("après l'ajout",liste) 
     fetchData(setListe, setIsLoading)
   }, [refresh])
   
@@ -28,6 +28,11 @@ const ListeApp = ({setApp, refresh}: any) => {
   const handleConfirm = (data: string) => {
     console.log('Données confirmées:', data);
     // Traitement des données
+  };
+
+  const deleteData = (data: string) => {
+    console.log('Données confirmées:', data);
+    deleteService(data);
   };
 
   const observation = (loyer: number) =>{
@@ -47,10 +52,8 @@ const ListeApp = ({setApp, refresh}: any) => {
   }
 
   if(isLoading){
-        return(
-          <View>
-            <ActivityIndicator size="large" color="#0000ff" />
-          </View>)
+    console.log("Loading...")
+        return(<LoadingIndicator message = "Chargement..." />)
         
   }
 
@@ -74,7 +77,7 @@ const ListeApp = ({setApp, refresh}: any) => {
                 />
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => setModalVisible(true)}
+                  onPress={() => deleteData(item.id)}
                 >
                 <Image 
                   source={icons.supprimer} 
