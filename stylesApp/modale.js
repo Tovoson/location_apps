@@ -61,8 +61,13 @@ export const styles = StyleSheet.create({
       borderWidth: 1,
       borderColor: '#cccccc',
     },
+    buttonAjout: {
+      backgroundColor: '#f8f8f8',
+      borderWidth: 1,
+      borderColor: '#cccccc',
+    },
     buttonConfirm: {
-      backgroundColor: '#2196F3',
+      backgroundColor: '#eb4d4b',
     },
     buttonTextCancel: {
       color: '#333333',

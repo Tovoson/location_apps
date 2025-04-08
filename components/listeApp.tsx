@@ -1,17 +1,46 @@
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native'
+import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator, Button } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { icons } from '@/constants/icons'
 import { styleListe } from "@/stylesApp/liste"
 import CustomModal from './modale'
 import {fetchData, deleteService} from '@/service/service'
 import LoadingIndicator from './loading'
+import BtnActualiser from './BtnActualiser'
 
 const ListeApp = ({setApp, refresh}: any) => {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [liste, setListe] = useState()
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState(null)
+  // const [bg, setBg] = useState('#FF8C00')
+
+  const [delData, setDelData] = useState({
+    id: '',
+    design: '',
+    loyer: ''
+  })
+
+  const obs = {
+    bas:{ 
+      text: 'Bas', 
+      color: '#FF8C00', 
+      padding: 3,
+      borderR: 5 
+    },
+    
+    Moyenne:{ 
+      text: 'Moyenne', 
+      color: '#FFCC00', 
+      padding: 3,
+      borderR: 5  
+    },
+    eleve:{ 
+      text: 'Elevé',
+      color: '#4CAF50', 
+      padding: 3,
+      borderR: 5 
+    }
+  }
 
 
   useEffect(() => {
@@ -19,30 +48,28 @@ const ListeApp = ({setApp, refresh}: any) => {
     fetchData(setListe, setIsLoading)
   }, [])
 
-  useEffect(() => {
-    console.log("après l'ajout",liste) 
-    fetchData(setListe, setIsLoading)
-  }, [refresh])
-  
-
   const handleConfirm = (data: string) => {
     console.log('Données confirmées:', data);
-    // Traitement des données
+    deleteService(data);
+    fetchData(setListe, setIsLoading);
   };
 
-  const deleteData = (data: string) => {
-    console.log('Données confirmées:', data);
-    deleteService(data);
+  const deleteData = (item: any) => {
+    setModalVisible(true);
+    setDelData({
+      id: item.id,
+      design: item.design,
+      loyer: item.loyer
+    })
   };
 
   const observation = (loyer: number) =>{
-        if(loyer < 1000){
-            return 'Bas'
-        } 
-        else if(loyer >= 1000 && loyer <= 5000){
-            return "Moyenne"
-        }else{
-            return "Elevé"
+        if (loyer < 1000) {
+          return obs.bas;
+        } else if (loyer >= 1000 && loyer <= 5000) {
+          return obs.Moyenne;
+        } else {
+          return obs.eleve;
         }
   }
 
@@ -58,13 +85,24 @@ const ListeApp = ({setApp, refresh}: any) => {
   }
 
   const renduLoyer = ({item}: any) =>{
+
+    const observationData = observation(item.loyer);
+
     return(
       
         <View style={styleListe.container1}>
           <View style={styleListe.container2}>
           <Text style={styleListe.text_primary}>{item.design}</Text>
               <Text style={styleListe.text_secondary}>{item.loyer}</Text>
-              <Text style={styleListe.text_secondary}>{observation(item.loyer)}</Text>
+              <Text 
+                  style={{
+                    backgroundColor: observationData.color, 
+                    padding: observationData.padding,
+                    borderRadius: observationData.borderR
+                  }}
+              >
+                {observationData.text}
+              </Text>
           </View>
           <View style={styleListe.container3}>
           <TouchableOpacity
@@ -77,7 +115,7 @@ const ListeApp = ({setApp, refresh}: any) => {
                 />
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => deleteData(item.id)}
+                  onPress={() => deleteData(item)}
                 >
                 <Image 
                   source={icons.supprimer} 
@@ -93,6 +131,19 @@ const ListeApp = ({setApp, refresh}: any) => {
   }
   return (
     <View>
+      {/* <BtnActualiser click = {fetchData(setListe, setIsLoading)} /> */}
+      <View style={styles.container1}>
+      <TouchableOpacity
+        onPress={() => fetchData(setListe, setIsLoading) }
+        style={styles.container}
+      >
+        <Image
+          source={icons.actualiser}
+          style={styles.images}
+        />
+      </TouchableOpacity>
+    </View>
+      
       <FlatList
         // horizontal={true}
         data={liste}
@@ -104,9 +155,35 @@ const ListeApp = ({setApp, refresh}: any) => {
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
         onConfirm={handleConfirm}
+        message=""
+        delData={delData}
       />
     </View>
   )
 }
 
 export default ListeApp
+
+const styles = StyleSheet.create({
+  images: {
+      width: 17,
+      height: 17
+  },
+  container: {
+      display: 'flex',
+      flex: 1,
+      height: 30,
+      width: 40,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 10,
+      borderWidth: 1
+
+  },
+  container1: {
+      height: 30,
+      width: 40,
+      display: 'flex',
+      margin: 10
+  }
+})

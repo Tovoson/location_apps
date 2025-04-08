@@ -12,7 +12,7 @@ import {
   SafeAreaView
 } from 'react-native';
 
-const CustomModal = ({ visible, onClose, onConfirm, message, delData }: any) => {
+const Modale2 = ({ visible, onClose, onConfirm, message }: any) => {
   const [inputText, setInputText] = useState('');
 
   return (
@@ -24,9 +24,7 @@ const CustomModal = ({ visible, onClose, onConfirm, message, delData }: any) => 
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text style={styles.modalTitle}>Titre</Text>
-          <Text style={styles.modalText}>design: {delData.design} </Text>
-          <Text style={styles.modalText}>loyer : {delData.loyer} </Text>
+          <Text style={styles.modalTitle}>{message}</Text>
           
           
           
@@ -35,18 +33,9 @@ const CustomModal = ({ visible, onClose, onConfirm, message, delData }: any) => 
               style={[styles.button, styles.buttonCancel]}
               onPress={onClose}
             >
-              <Text style={styles.buttonTextCancel}>Annuler</Text>
+              <Text style={styles.buttonTextCancel}>OK</Text>
             </TouchableOpacity>
             
-            <TouchableOpacity
-              style={[styles.button, styles.buttonConfirm]}
-              onPress={() => {
-                onConfirm(delData.id);
-                onClose();
-              }}
-            >
-              <Text style={styles.buttonTextConfirm}>Confirmer</Text>
-            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -54,4 +43,4 @@ const CustomModal = ({ visible, onClose, onConfirm, message, delData }: any) => 
   );
 };
 
-export default CustomModal
+export default Modale2

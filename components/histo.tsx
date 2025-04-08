@@ -10,10 +10,12 @@ const MyHistogram = ({stat}: any) => {
     labels: ['Min', 'Max', 'Total'],
     datasets: [
       {
-        data: [20, 45, 28],
+        data: [stat.min, stat.max, stat.total],
       },
     ],
   };
+
+  console.log(stat)
   
 
   const chartConfig = {

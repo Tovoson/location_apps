@@ -1,10 +1,11 @@
-import { View, Text } from 'react-native'
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { style } from '@/stylesApp/AffichageDetails'
 // import { fakeData } from "@/fakedata/fakeApp"
 import { fetchData } from '@/service/service'
 import axios from 'axios'
 import LoadingIndicator from './loading'
+import { icons } from '@/constants/icons'
 
 const AffichageDetails = ({setStat, setHLoading}: any) => {
   
@@ -101,6 +102,20 @@ const AffichageDetails = ({setStat, setHLoading}: any) => {
   }
 
   return (
+
+    <>
+    
+    <View style={styles.container1}>
+      <TouchableOpacity
+        onPress={() => fetchData()}
+        style={styles.container}
+      >
+        <Image
+          source={icons.actualiser}
+          style={styles.images}
+        />
+      </TouchableOpacity>
+    </View>
     <View style={style.container} >
       <View style={style.element}>
         <Text>Total des loyers</Text>
@@ -115,7 +130,32 @@ const AffichageDetails = ({setStat, setHLoading}: any) => {
         <Text>{stats.min}</Text>
       </View>
     </View>
+    </>
   )
 }
 
 export default AffichageDetails
+
+const styles = StyleSheet.create({
+  images: {
+      width: 17,
+      height: 17
+  },
+  container: {
+      display: 'flex',
+      flex: 1,
+      height: 30,
+      width: 40,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 10,
+      borderWidth: 1
+
+  },
+  container1: {
+      height: 30,
+      width: 40,
+      display: 'flex',
+      margin: 10
+  }
+})

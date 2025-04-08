@@ -8,13 +8,17 @@ export const style = StyleSheet.create({
         flexDirection: 'row',
         width: "93%",
         margin: 11.5,
+        height: 90
         // gap: 5
     },
     element: {
         display: "flex",
-        backgroundColor: 'pink',
+        borderWidth: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 5
+        padding: 5,
+        height: 80,
+        borderRadius: 10
+        // width: 100
     }
 })

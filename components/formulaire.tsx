@@ -3,9 +3,12 @@ import React, { useEffect, useState } from 'react'
 import {style} from '@/stylesApp/formulaires'
 import { icons } from '@/constants/icons'
 import {addData, fetchData, updateData} from '@/service/service'
+import CustomModal from './modale'
+import Modale2 from './modale2'
 
 const Formulaire = ({app, setRefresh}: any) => {
-
+    
+  const [modalVisible, setModalVisible] = useState(false);
     const [formData, setformData] = useState({
       design: '',
       loyer: ''
@@ -17,8 +20,6 @@ const Formulaire = ({app, setRefresh}: any) => {
         setformData(app);
         setIsExist(true)
       }else{
-
-        
         return setformData({
           design: '',
           loyer: ''
@@ -26,14 +27,24 @@ const Formulaire = ({app, setRefresh}: any) => {
       }
     
     }, [app])
-    
 
   const ajout = () => {
     addData(formData);
-    setRefresh(true)
+    // setRefresh(true)
+    setModalVisible(true)
+    reset()
   }
   const modifier = () => {
     updateData(formData)
+    setModalVisible(true)
+    reset()
+  }
+  const reset = () => {
+    setformData({
+      design: '',
+      loyer: ''
+    });
+    setIsExist(false)
   }
   const handleChange = (field: string, value: any) => {
     setformData({...formData, [field]: value})
@@ -61,6 +72,21 @@ const Formulaire = ({app, setRefresh}: any) => {
         >
             <Image source={isExist ? icons.modifier : icons.ajouter} style={style.img} />
         </TouchableOpacity>
+        <TouchableOpacity
+            style={style.btn}
+            onPress={reset}
+        >
+            <Image source={icons.reset} style={style.img} />
+        </TouchableOpacity>
+
+        <Modale2
+          visible={modalVisible}
+          onClose={() => setModalVisible(false)}
+          // onConfirm={handleConfirm}
+          message={isExist ? "Modification effectué" : "Ajout effectué"}
+          // delData={delData}
+
+        />
     </View>
   )
 }
