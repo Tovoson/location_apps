@@ -12,9 +12,9 @@ export default function Index() {
   const [Hloading, setHLoading] = useState(false)
   
   const [stat, setStat] = useState({
-    min: '',
-    max: '',
-    total: ''
+    min: 0,
+    max: 0,
+    total: 0
   })
 
   console.log("stata", stat)

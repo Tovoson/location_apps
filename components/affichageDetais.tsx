@@ -16,8 +16,7 @@ const AffichageDetails = ({setStat, setHLoading}: any) => {
   })
   const [loading, setLoading] = useState(false)
 
-
-    // Fonction pour récupérer les données de l'API
+  // Fonction pour récupérer les données de l'API
   const fetchData = async () => {
     try {
       setLoading(true)
@@ -50,7 +49,7 @@ const AffichageDetails = ({setStat, setHLoading}: any) => {
 
   const loyerTotal = (liste: string | any[]) =>{
     if (!liste || liste.length === 0) {
-      return null; // Gérer le cas où la liste est vide
+      return 0; // Gérer le cas où la liste est vide
     }
 
     let total = 0
@@ -64,7 +63,7 @@ const AffichageDetails = ({setStat, setHLoading}: any) => {
   const loyerMin = (liste: string | any[]) =>{
 
     if (!liste || liste.length === 0) {
-      return null; // Gérer le cas où la liste est vide
+      return 0; // Gérer le cas où la liste est vide
     }
 
     let Min = liste[0].loyer
@@ -79,7 +78,7 @@ const AffichageDetails = ({setStat, setHLoading}: any) => {
 // Modifiez votre fonction loyerMax pour prendre la liste en paramètre
   const loyerMax = (liste: string | any[]) => {
     if (!liste || liste.length === 0) {
-          return null; // Gérer le cas où la liste est vide
+          return 0; // Gérer le cas où la liste est vide
     }
     
     let Max = liste[0].loyer; 
