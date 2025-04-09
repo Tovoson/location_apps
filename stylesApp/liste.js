@@ -23,6 +23,23 @@ export const styleListe = StyleSheet.create({
         justifyContent: 'center',
         gap: 4
     },
+    container0: {
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: '#dfe6e9',
+        marginBottom: 10,
+        paddingBottom: 30
+    },
+    titre: {
+            fontSize: 18,
+            fontWeight: '600',
+            color: '#444',
+            marginBottom: 15,
+            marginTop: 20,
+            textTransform: 'uppercase',
+            textAlign: 'center',
+        
+    },
     container3: {
         flexDirection: 'row',
         alignItems: 'center',

@@ -130,19 +130,19 @@ const ListeApp = ({setApp, refresh}: any) => {
   
   }
   return (
-    <View>
-      {/* <BtnActualiser click = {fetchData(setListe, setIsLoading)} /> */}
+    <View style={styleListe.container0}>
+      <Text style={styleListe.titre} >Liste des appartements</Text>
       <View style={styles.container1}>
-      <TouchableOpacity
-        onPress={() => fetchData(setListe, setIsLoading) }
-        style={styles.container}
-      >
-        <Image
-          source={icons.actualiser}
-          style={styles.images}
-        />
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity
+          onPress={() => fetchData(setListe, setIsLoading) }
+          style={styles.container}
+        >
+          <Image
+            source={icons.actualiser}
+            style={styles.images}
+          />
+        </TouchableOpacity>
+      </View>
       
       <FlatList
         // horizontal={true}
@@ -170,14 +170,18 @@ const styles = StyleSheet.create({
       height: 17
   },
   container: {
-      display: 'flex',
-      flex: 1,
-      height: 30,
-      width: 40,
+      backgroundColor: '#3498db', // Bleu clair
+      paddingVertical: 10,
+      paddingHorizontal: 15,
+      borderRadius: 8,
+      flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      borderRadius: 10,
-      borderWidth: 1
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.2,
+      shadowRadius: 3,
+      elevation: 3,
 
   },
   container1: {

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Dimensions, Text } from 'react-native';
+import { View, Dimensions, Text, StyleSheet } from 'react-native';
 import { BarChart } from 'react-native-chart-kit';
 import LoadingIndicator from './loading';
 
@@ -32,19 +32,47 @@ const MyHistogram = ({stat}: any) => {
   };
 
   return (
-    <View>
-      <Text>Histogramme mensuel</Text>
+    <View style={style.container} >
+      <Text style={style.text} >Histogramme</Text>
       <BarChart
         data={data}
-        width={screenWidth - 20}
-        height={220}
+        width={screenWidth-20}
+        height={300}
         chartConfig={chartConfig}
         verticalLabelRotation={30}
         fromZero={true}
         showBarTops={true}
+        yAxisLabel="€ "
+        yAxisSuffix=""
+        style={style.graphe}
       />
     </View>
   );
 };
 
 export default MyHistogram;
+
+const style = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 10,
+    marginBottom: 10,
+    // width: '95%',
+    // marginLeft: 10,
+    backgroundColor: '#dfe6e9'
+  },
+  text: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#444',
+    marginBottom: 15,
+    marginTop: 20,
+    textTransform: 'uppercase',
+  },
+  graphe: {
+
+  },
+})

@@ -102,32 +102,34 @@ const AffichageDetails = ({setStat, setHLoading}: any) => {
   }
 
   return (
-
     <>
     
-    <View style={styles.container1}>
-      <TouchableOpacity
-        onPress={() => fetchData()}
-        style={styles.container}
-      >
-        <Image
-          source={icons.actualiser}
-          style={styles.images}
-        />
-      </TouchableOpacity>
-    </View>
-    <View style={style.container} >
-      <View style={style.element}>
-        <Text>Total des loyers</Text>
-        <Text>{stats.total}</Text>
+    <View style={style.container1} >
+      <Text style={style.titre} >Statistiques</Text>
+      <View style={styles.container1}>
+        <TouchableOpacity
+          onPress={() => fetchData()}
+          style={styles.container}
+        >
+          <Image
+            source={icons.actualiser}
+            style={styles.images}
+          />
+        </TouchableOpacity>
       </View>
-      <View style={style.element}>
-        <Text>Loyer Maximal</Text>
-        <Text>{stats.max}</Text>
-      </View>
-      <View style={style.element}>
-        <Text>Loyer Minimal</Text>
-        <Text>{stats.min}</Text>
+      <View style={style.container}>
+        <View style={style.tota}>
+          <Text style={style.text} >Total des loyers</Text>
+          <Text style={style.value} >{stats.total}</Text>
+        </View>
+        <View style={style.max}>
+          <Text style={style.text}>Loyer Maximal</Text>
+          <Text style={style.value}>{stats.max}</Text>
+        </View>
+        <View style={style.min}>
+          <Text style={style.text}>Loyer Minimal</Text>
+          <Text style={style.value}>{stats.min}</Text>
+        </View>
       </View>
     </View>
     </>
@@ -142,20 +144,25 @@ const styles = StyleSheet.create({
       height: 17
   },
   container: {
-      display: 'flex',
-      flex: 1,
-      height: 30,
-      width: 40,
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderRadius: 10,
-      borderWidth: 1
+    backgroundColor: '#3498db', // Bleu clair
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 3,
 
   },
   container1: {
       height: 30,
       width: 40,
       display: 'flex',
-      margin: 10
+      marginLeft: 13,
+      marginTop: 10
   }
 })
