@@ -150,6 +150,7 @@ const ListeApp = ({setApp, refresh}: any) => {
         keyExtractor={item => item.id}
         showsHorizontalScrollIndicator={false}
         renderItem={renduLoyer}
+        scrollEnabled={true}
       />
       <CustomModal
         visible={modalVisible}

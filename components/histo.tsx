@@ -15,13 +15,6 @@ const MyHistogram = ({stat}: any) => {
     ],
   };
 
-  // if (stat.min=== 0 || stat.max === 0 || stat.total === 0) {
-  //   return (
-  //     <View>
-  //       <Text>Valeur vide</Text>
-  //     </View>
-  //   ); // Gérer le cas où la liste est vide
-  // }
 
   const chartConfig = {
     backgroundColor: '#ffffff',
