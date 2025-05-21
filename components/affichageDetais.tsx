@@ -1,7 +1,7 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { style } from '@/stylesApp/AffichageDetails'
-// import { fakeData } from "@/fakedata/fakeApp"
+import { fakeData } from "@/fakedata/fakeApp"
 import { fetchData } from '@/service/service'
 import axios from 'axios'
 import LoadingIndicator from './loading'
@@ -20,19 +20,19 @@ const AffichageDetails = ({setStat, setHLoading}: any) => {
   const fetchData = async () => {
     try {
       setLoading(true)
-      const reponse = await axios.get("http://127.0.0.1:8000/appart/liste/")
-      const data = reponse.data;
-      const liste = Array.isArray(data) ? data : (data.results || data.data || Object.values(data));
+      // const reponse = await axios.get("http://127.0.0.1:8000/appart/liste/")
+      // const data = reponse.data;
+      // const liste = Array.isArray(data) ? data : (data.results || data.data || Object.values(data));
 
-        const maxLoyer = loyerMax(liste);
-        const minLoyer = loyerMin(liste);
-        const totalLoyer = loyerTotal(liste)
+        const maxLoyer = loyerMax(fakeData);
+        const minLoyer = loyerMin(fakeData);
+        const totalLoyer = loyerTotal(fakeData)
         
 
         setStats({
           min: minLoyer,
           max: maxLoyer,
-          total: totalLoyer
+          total: totalLoyer.toString()
         })
 
         setLoading(false)
@@ -102,7 +102,6 @@ const AffichageDetails = ({setStat, setHLoading}: any) => {
 
   return (
     <>
-    
     <View style={style.container1} >
       <Text style={style.titre} >Statistiques</Text>
       <View style={styles.container1}>

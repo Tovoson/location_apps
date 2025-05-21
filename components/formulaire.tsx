@@ -119,5 +119,3 @@ const Formulaire = ({app, setRefresh}: any) => {
 }
 
 export default Formulaire
-
-const styles = StyleSheet.create({})

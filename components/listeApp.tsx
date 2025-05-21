@@ -5,18 +5,23 @@ import { styleListe } from "@/stylesApp/liste"
 import CustomModal from './modale'
 import {fetchData, deleteService} from '@/service/service'
 import LoadingIndicator from './loading'
-import BtnActualiser from './BtnActualiser'
+import { fakeData } from '../fakedata/fakeApp'
 
-const ListeApp = ({setApp, refresh}: any) => {
+type Props = {
+  id: number,
+  Design: string,
+  loyer: number
+}
+
+const ListeApp = (PropsFonction: any) => {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [liste, setListe] = useState()
   const [isLoading, setIsLoading] = useState(false)
-  // const [bg, setBg] = useState('#FF8C00')
 
   const [delData, setDelData] = useState({
     id: '',
-    design: '',
+    Design: '',
     loyer: ''
   })
 
@@ -44,8 +49,8 @@ const ListeApp = ({setApp, refresh}: any) => {
 
 
   useEffect(() => {
-    console.log(liste) 
-    fetchData(setListe, setIsLoading)
+    console.log(fakeData) 
+    // fetchData(setListe, setIsLoading)
   }, [])
 
   const handleConfirm = (data: string) => {
@@ -58,7 +63,7 @@ const ListeApp = ({setApp, refresh}: any) => {
     setModalVisible(true);
     setDelData({
       id: item.id,
-      design: item.design,
+      Design: item.design,
       loyer: item.loyer
     })
   };
@@ -74,8 +79,7 @@ const ListeApp = ({setApp, refresh}: any) => {
   }
 
   const selectItem = (item: any) => {
-    setApp(item)
-    // console.log(item)
+    PropsFonction.setApp(item)
   }
 
   if(isLoading){
@@ -84,7 +88,7 @@ const ListeApp = ({setApp, refresh}: any) => {
         
   }
 
-  const renduLoyer = ({item}: any) =>{
+  const renduLoyer = (item: Props ) =>{
 
     const observationData = observation(item.loyer);
 
@@ -92,7 +96,7 @@ const ListeApp = ({setApp, refresh}: any) => {
       
         <View style={styleListe.container1}>
           <View style={styleListe.container2}>
-          <Text style={styleListe.text_primary}>{item.design}</Text>
+            <Text style={styleListe.text_primary}>{item.Design}</Text>
               <Text style={styleListe.text_secondary}>{item.loyer}</Text>
               <Text 
                   style={{
@@ -105,7 +109,7 @@ const ListeApp = ({setApp, refresh}: any) => {
               </Text>
           </View>
           <View style={styleListe.container3}>
-          <TouchableOpacity
+            <TouchableOpacity
                 onPress={() => selectItem(item)}
                 >
                 <Image 
@@ -121,9 +125,8 @@ const ListeApp = ({setApp, refresh}: any) => {
                   source={icons.supprimer} 
                   style={styleListe.img}
                    />
-                </TouchableOpacity>                    
+            </TouchableOpacity>                    
           </View>
-          
         </View>
            
     )
@@ -134,11 +137,20 @@ const ListeApp = ({setApp, refresh}: any) => {
       <Text style={styleListe.titre} >Liste des appartements</Text>
       <View style={styles.container1}>
         <TouchableOpacity
-          onPress={() => fetchData(setListe, setIsLoading) }
+            onPress={() => fetchData(setListe, setIsLoading) }
+            style={styles.container}
+          >
+              <Image
+                source={icons.actualiser}
+                style={styles.images}
+              />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => PropsFonction.setAfficheForm(!PropsFonction.afficheForm)}
           style={styles.container}
         >
           <Image
-            source={icons.actualiser}
+            source={icons.ajouter}
             style={styles.images}
           />
         </TouchableOpacity>
@@ -146,10 +158,10 @@ const ListeApp = ({setApp, refresh}: any) => {
       
       <FlatList
         // horizontal={true}
-        data={liste}
-        keyExtractor={item => item.id}
+        data={fakeData}
+        keyExtractor={item => String(item.id)}
         showsHorizontalScrollIndicator={false}
-        renderItem={renduLoyer}
+        renderItem={({ item }) => renduLoyer(item)}
         scrollEnabled={true}
       />
       <CustomModal
@@ -187,8 +199,11 @@ const styles = StyleSheet.create({
   },
   container1: {
       height: 30,
-      width: 40,
+      width: "95%",
       display: 'flex',
-      margin: 10
+      margin: 10,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
   }
 })

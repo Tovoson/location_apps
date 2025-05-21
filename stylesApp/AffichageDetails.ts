@@ -1,6 +1,8 @@
 import { StyleSheet } from "react-native";
 
-const boxBase = {
+import { ViewStyle } from "react-native";
+
+const boxBase: ViewStyle = {
     flex: 1,
     borderRadius: 10,
     padding: 15,

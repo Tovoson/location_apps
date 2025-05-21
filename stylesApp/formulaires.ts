@@ -1,9 +1,8 @@
 import { StyleSheet } from "react-native";
+import { ViewStyle } from "react-native";
 
-
-const buttonBaseStyle = {
+const buttonBaseStyle: ViewStyle = {
     paddingVertical: 12,
-    // paddingHorizontal: 20,
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
@@ -20,11 +19,6 @@ const buttonBaseStyle = {
 export const style = StyleSheet.create({
     input:{
         width: 350,
-        // margin: 10,
-        // padding: 10,
-        // borderWidth: 2,
-        // borderColor: 'grey',
-        // borderRadius: 5
 
         borderWidth: 1,
         borderColor: '#ddd',
@@ -34,19 +28,17 @@ export const style = StyleSheet.create({
         fontSize: 16,
         color: '#333',
 
-
     },
     container:{
-        display: 'flex',
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: 'red',
         width: '100%',
-        minHeight: 300,
-        gap: 5,
+        // height: '100%',
+        gap: 15,
         backgroundColor: '#dfe6e9',
         marginBottom: 10,
-        paddingBottom: 30
+        paddingBottom: 30,
     },
     btnAjouter:{
         ...buttonBaseStyle,

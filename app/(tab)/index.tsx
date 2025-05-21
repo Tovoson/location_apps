@@ -10,6 +10,7 @@ export default function Index() {
   const [app, setApp] = useState()
   const [refresh, setRefresh] = useState(false)
   const [Hloading, setHLoading] = useState(false)
+  const [afficheForm, setAfficheForm] = useState(false)
   
   const [stat, setStat] = useState({
     min: 0,
@@ -21,8 +22,11 @@ export default function Index() {
 
   return (
     <ScrollView>
-        <Formulaire app ={app}  setRefresh={setRefresh} />
-        <ListeApp setApp = {setApp} refresh={refresh} />
+        {
+          afficheForm ? <Formulaire /> : ''
+        }
+        
+        <ListeApp setApp = {setApp} refresh={refresh} setAfficheForm = {setAfficheForm} afficheForm = {afficheForm} />
         <AffichageDetails setStat={setStat} setHLoading ={setHLoading} />
         {Hloading ? 
           <MyHistogram stat={stat} /> 
